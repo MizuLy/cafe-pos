@@ -11,7 +11,7 @@ export default function Sidebar() {
       <ul className="flex flex-col gap-2">
         <li>
           <Link
-            to={"/"}
+            to={"/dashboard"}
             className="flex items-center gap-3 p-2 rounded-lg text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition"
           >
             <LuLayoutDashboard size={20} />
