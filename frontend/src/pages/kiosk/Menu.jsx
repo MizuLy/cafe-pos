@@ -113,29 +113,75 @@ export default function Menu() {
       </div>
 
       {/* CART */}
-      <div className="w-80 bg-white shadow-xl p-6 flex flex-col">
-        <h2 className="text-xl mb-4">Your Order</h2>
+      <div className="w-96 bg-white shadow-xl p-8 flex flex-col">
+        <h2 className="text-2xl mb-6 font-semibold">Your Order</h2>
 
-        <div className="flex-1 overflow-y-auto space-y-2">
+        <div className="flex-1 overflow-y-auto space-y-4">
           {cart.map((item, i) => (
-            <div key={i} className="flex justify-between text-sm border-b pb-1">
-              <span>
-                {item.item_name} x{item.qty}
+            <div
+              key={i}
+              className="flex justify-between items-center text-lg border-b pb-3 gap-2"
+            >
+              {/* Item name (wraps naturally) */}
+              <span className="font-medium flex-1 break-words">
+                {item.item_name}
               </span>
-              <span>${parseFloat(item.price * item.qty).toFixed(2)}</span>
+
+              {/* Quantity buttons */}
+              <div className="flex items-center bg-gray-100 rounded-full px-2 py-1 ml-4 border border-gray-200 shadow-sm">
+                <button
+                  className="w-8 h-8 flex items-center justify-center rounded-full text-gray-600 hover:bg-white hover:text-red-500 transition-all active:scale-90"
+                  onClick={() => {
+                    if (item.qty > 1) {
+                      setCart(
+                        cart.map((ci) =>
+                          ci.id === item.id ? { ...ci, qty: ci.qty - 1 } : ci,
+                        ),
+                      );
+                    } else {
+                      setCart(cart.filter((ci) => ci.id !== item.id));
+                    }
+                  }}
+                >
+                  <span className="text-xl font-bold">−</span>
+                </button>
+
+                <span className="px-3 font-bold text-gray-800 min-w-[30px] text-center">
+                  {item.qty}
+                </span>
+
+                <button
+                  className="w-8 h-8 flex items-center justify-center rounded-full text-gray-600 hover:bg-white hover:text-green-600 transition-all active:scale-90"
+                  onClick={() => {
+                    setCart(
+                      cart.map((ci) =>
+                        ci.id === item.id ? { ...ci, qty: ci.qty + 1 } : ci,
+                      ),
+                    );
+                  }}
+                >
+                  <span className="text-xl font-bold">+</span>
+                </button>
+              </div>
+
+              {/* Total price */}
+              <span className="font-semibold text-xl ml-4">
+                ${parseFloat(item.price * item.qty).toFixed(2)}
+              </span>
             </div>
           ))}
         </div>
 
-        <div className="mt-4 border-t pt-4">
-          <p className="flex justify-between text-lg">
+        <div className="mt-6 border-t pt-6">
+          <p className="flex justify-between text-2xl font-semibold mb-4">
             <span>Total</span>
             <span>${total.toFixed(2)}</span>
           </p>
 
           <button
+            disabled={cart <= 0}
             onClick={handleCheckout}
-            className="mt-4 w-full bg-black text-white py-3 rounded-lg text-lg"
+            className="w-full bg-black text-white py-5 rounded-xl text-2xl font-semibold hover:opacity-90 transition"
           >
             Checkout
           </button>
