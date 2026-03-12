@@ -9,18 +9,18 @@ import {
 
 export default function DrinkPieChart({ data }) {
   const COLORS = [
-    "#FFB6C1",
-    "#B4E7CE",
-    "#C3B1E1",
-    "#FFD4A3",
-    "#A8E6CF",
-    "#FFE5CC",
-    "#FF85A2",
-    "#85E3FF",
-    "#FFD97D",
-    "#C9A0DC",
-    "#A3E4D7",
-    "#FFAB91",
+    "#FF6F91",
+    "#4ED8A3",
+    "#9B6BFF",
+    "#FF9F43",
+    "#00E6A8",
+    "#FFC46B",
+    "#FF3D77",
+    "#3DDCFF",
+    "#FFB800",
+    "#A66BFF",
+    "#2EE6C3",
+    "#FF7043",
   ];
 
   return (

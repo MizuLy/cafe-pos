@@ -7,7 +7,23 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Cell,
 } from "recharts";
+
+const COLORS = [
+  "#FF6F91",
+  "#4ED8A3",
+  "#9B6BFF",
+  "#FF9F43",
+  "#00E6A8",
+  "#FFC46B",
+  "#FF3D77",
+  "#3DDCFF",
+  "#FFB800",
+  "#A66BFF",
+  "#2EE6C3",
+  "#FF7043",
+];
 
 export default function RevenueBarChart({ data }) {
   return (
@@ -20,7 +36,14 @@ export default function RevenueBarChart({ data }) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="revenue" fill="#FF8042" />
+          <Bar dataKey="revenue">
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -33,7 +33,9 @@ const addOrder = async (drink_id, quantity) => {
 // GET
 const getOrder = async () => {
   try {
-    const [result] = await db.query("SELECT * FROM `order`");
+    const [result] = await db.query(
+      "SELECT * FROM `order` ORDER BY created_at DESC",
+    );
 
     return result;
   } catch (err) {

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { RiDrinksLine } from "react-icons/ri";
 import { MdOutlineReceiptLong } from "react-icons/md";
+import { IoLogOutOutline } from "react-icons/io5";
+import { CgMenuGridO } from "react-icons/cg";
 
 export default function Sidebar() {
   return (
@@ -38,6 +40,24 @@ export default function Sidebar() {
             Order
           </Link>
         </li>
+
+        <li>
+          <Link
+            to={"/kiosk"}
+            className="flex items-center gap-3 p-2 rounded-lg text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition"
+          >
+            <CgMenuGridO size={20} />
+            Menu
+          </Link>
+        </li>
+      </ul>
+      <ul className="bottom-5 absolute">
+        <Link to={"/logout"}>
+          <li className="border border-red-600 p-2 gap-3 rounded-lg hover:bg-red-500 hover:text-white flex items-center transition">
+            <IoLogOutOutline size={20} />
+            Log Out
+          </li>
+        </Link>
       </ul>
     </div>
   );

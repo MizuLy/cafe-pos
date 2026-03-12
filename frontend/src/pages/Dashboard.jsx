@@ -80,19 +80,21 @@ export default function Dashboard() {
           title="Total Orders"
           value={totalOrder}
           icon={RiDrinksLine}
-          gradient="from-orange-400 to-orange-500"
+          borderColor="border-orange-500"
         />
+
         <StatCard
           title="Drinks Ordered"
           value={totalDrinksOrdered}
           icon={IoBagCheckOutline}
-          gradient="from-blue-400 to-blue-500"
+          borderColor="border-blue-500"
         />
+
         <StatCard
           title="Total Revenue"
           value={`$${totalRevenue.toFixed(2)}`}
           icon={IoCashOutline}
-          gradient="from-green-400 to-green-500"
+          borderColor="border-green-500"
         />
       </div>
 

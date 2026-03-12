@@ -17,7 +17,9 @@ const addDrink = async (item_name, price, image_url) => {
 // GET
 const getDrinks = async () => {
   try {
-    const [result] = await db.query("SELECT * FROM `drink`");
+    const [result] = await db.query(
+      "SELECT * FROM `drink` ORDER BY created_at DESC",
+    );
 
     return result;
   } catch (err) {

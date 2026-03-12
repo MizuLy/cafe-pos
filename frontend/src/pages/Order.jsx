@@ -206,6 +206,7 @@ export default function Order() {
               <th className="px-6 py-3 text-left font-semibold">Price</th>
               <th className="px-6 py-3 text-left font-semibold">Quantity</th>
               <th className="px-6 py-3 text-left font-semibold">Total price</th>
+              <th className="px-6 py-3 text-left font-semibold">Ordered at</th>
               <th className="px-6 py-3 text-left font-semibold">Action</th>
             </tr>
           </thead>
@@ -217,6 +218,9 @@ export default function Order() {
                   <td className="px-6 py-4">{o.price}</td>
                   <td className="px-6 py-4">{o.quantity}</td>
                   <td className="px-6 py-4 font-semibold">{o.total_price}</td>
+                  <td className="px-6 py-4">
+                    {new Date(o.created_at).toLocaleString()}
+                  </td>
                   <td className="px-6 py-4">
                     <div className="space-x-2 flex items-center">
                       <button
@@ -239,10 +243,16 @@ export default function Order() {
           ) : (
             <tbody>
               <tr>
-                <td colSpan="5" className="text-center py-8">
-                  <div className="flex justify-center items-center text-gray-500">
-                    The data is either doesn't exist or server isn't
-                    connected...
+                <td colSpan="6" className="text-center py-8">
+                  <div className="flex flex-col justify-center items-center mt-2 text-gray-400">
+                    <MdOutlineReceiptLong
+                      size={64}
+                      className="mb-4 opacity-50"
+                    />
+                    <p className="text-lg">
+                      The data is either doesn't exist or server isn't
+                      connected...
+                    </p>
                   </div>
                 </td>
               </tr>
