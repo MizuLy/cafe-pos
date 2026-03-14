@@ -17,6 +17,8 @@ export default function Order() {
 
   const [search, setSearch] = useState("");
   const [edit, setEdit] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   // Fetch API from Order
   const getOrder = async () => {
@@ -83,6 +85,13 @@ export default function Order() {
       .includes(search.toLowerCase());
   });
 
+  // Pagination
+  const totalPages = Math.ceil(filterSearch.length / itemsPerPage); // all orders / 10
+  const currentOrders = filterSearch.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
+
   // ====Edit====
   const handleUpdate = async (o) => {
     // Find the drink that matches this order's item_name
@@ -128,7 +137,10 @@ export default function Order() {
           type="search"
           name="search"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setCurrentPage(1);
+          }}
           placeholder="Search..."
           className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition animate-pulse"
         />
@@ -210,9 +222,9 @@ export default function Order() {
               <th className="px-6 py-3 text-left font-semibold">Action</th>
             </tr>
           </thead>
-          {filterSearch.length > 0 ? (
+          {currentOrders.length > 0 ? (
             <tbody>
-              {filterSearch.map((o) => (
+              {currentOrders.map((o) => (
                 <tr key={o.id} className="border-b hover:bg-gray-50 transition">
                   <td className="px-6 py-4">{o.item_name}</td>
                   <td className="px-6 py-4">{o.price}</td>
@@ -259,6 +271,17 @@ export default function Order() {
             </tbody>
           )}
         </table>
+      </div>
+      <div className="join mt-4">
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <button
+            key={page}
+            className={`join-item btn btn-square shadow-md ${currentPage === page ? "btn-active bg-orange-400 text-white" : ""}`}
+            onClick={() => setCurrentPage(page)}
+          >
+            {page}
+          </button>
+        ))}
       </div>
     </div>
   );
