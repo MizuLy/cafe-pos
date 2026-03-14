@@ -1,18 +1,19 @@
-const { register, login } = require("../models/authModel");
+const { register, login, currentUser } = require("../models/authModel");
 const jwt = require("jsonwebtoken");
 
 // REGISTER
 const registerController = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, avatar } = req.body;
 
-    const result = await register(name, email, password);
+    const result = await register(name, email, password, avatar);
 
     if (result === false)
       return res.status(400).json({ message: "Email already registered" });
 
     res.status(201).json({ message: "Register success" });
   } catch (err) {
+    console.error("Register error:", err);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -24,9 +25,10 @@ const loginController = async (req, res) => {
 
     const user = await login(email, password);
 
-    if (user === null) res.status(404).json({ message: "User not found" });
+    if (user === null)
+      return res.status(404).json({ message: "User not found" });
     if (user === false)
-      res.status(400).json({ message: "Incorrect email or password" });
+      return res.status(400).json({ message: "Incorrect email or password" });
 
     const token = jwt.sign(
       {
@@ -52,4 +54,18 @@ const loginController = async (req, res) => {
   }
 };
 
-module.exports = { registerController, loginController };
+const currentUserController = async (req, res) => {
+  try {
+    const id = req.user.id;
+
+    const user = await currentUser(id);
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = { registerController, loginController, currentUserController };

@@ -2,7 +2,7 @@ const db = require("../config/db");
 const bcrypt = require("bcrypt");
 
 // REGISTER
-const register = async (name, email, password) => {
+const register = async (name, email, password, avatar) => {
   try {
     // Check for existing email
     const [existing] = await db.query("SELECT * FROM `user` WHERE email = ?", [
@@ -15,8 +15,8 @@ const register = async (name, email, password) => {
 
     // Insert new user
     const [result] = await db.query(
-      "INSERT INTO `user`(`name`, `email`, `password`) VALUES (?,?,?)",
-      [name, email, hashedPassword],
+      "INSERT INTO `user`(`name`, `email`, `password`, `avatar`) VALUES (?,?,?,?)",
+      [name, email, hashedPassword, avatar],
     );
 
     return result;
@@ -47,4 +47,20 @@ const login = async (email, password) => {
   }
 };
 
-module.exports = { register, login };
+// Current user
+const currentUser = async (id) => {
+  try {
+    const [result] = await db.query(
+      "SELECT id, name, email, avatar FROM `user` WHERE id = ?",
+      [id],
+    );
+
+    if (result.length === 0) return null;
+
+    return result[0];
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = { register, login, currentUser };

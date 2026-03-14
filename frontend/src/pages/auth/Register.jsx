@@ -7,6 +7,7 @@ export default function Register() {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [repassword, setRepassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showRepassword, setShowRepassword] = useState(false);
@@ -30,6 +31,7 @@ export default function Register() {
           name: fullname,
           email,
           password,
+          avatar,
         }),
       });
 
@@ -39,7 +41,7 @@ export default function Register() {
         toast.success("Register success!");
         navigate("/login");
       } else {
-        toast.error(data.msg || "Password don't match");
+        toast.error(data.msg || "Registration failed");
       }
     } catch (err) {
       console.error(err);
@@ -156,6 +158,24 @@ export default function Register() {
                 {showRepassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
               </button>
             </div>
+          </div>
+
+          {/* Avatar */}
+          <div>
+            <label
+              htmlFor="avatar"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Avatar
+            </label>
+            <input
+              id="avatar"
+              name="avatar"
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+              placeholder="Paste image URL (e.g., https://...)"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition"
+            />
           </div>
 
           {/* Submit Button */}

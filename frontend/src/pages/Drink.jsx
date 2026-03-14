@@ -4,6 +4,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Profile from "../components/Profile";
 
 export default function Drink() {
   const API = `http://localhost:8880/api/drink`;
@@ -105,9 +106,15 @@ export default function Drink() {
   return (
     <div className="">
       <Toaster position="top-right" />
-      <h1 className="text-3xl font-medium flex gap-2">
-        <RiDrinksLine /> Drink
-      </h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-medium flex gap-2">
+          <RiDrinksLine /> Overview
+        </h1>
+        <div className="hover:-translate-y-1 transition-transform duration-200">
+          <Profile />
+        </div>
+      </div>
+
       <p className="text-xl mt-2">This is where admin can add or edit drinks</p>
 
       <div className="space-x-2 mt-2">

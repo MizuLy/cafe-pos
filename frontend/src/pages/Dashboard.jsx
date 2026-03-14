@@ -6,6 +6,7 @@ import axios from "axios";
 import StatCard from "../components/StatCard";
 import DrinkPieChart from "../components/DrinkPieChart";
 import RevenueBarChart from "../components/RevenueBarChart";
+import Profile from "../components/Profile";
 
 export default function Dashboard() {
   const APIOrder = `http://localhost:8880/api/order`;
@@ -69,9 +70,15 @@ export default function Dashboard() {
 
   return (
     <div className="">
-      <h1 className="text-3xl font-medium flex gap-2">
-        <LuLayoutDashboard /> Overview
-      </h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-medium flex gap-2">
+          <LuLayoutDashboard /> Overview
+        </h1>
+        <div className="hover:-translate-y-1 transition-transform duration-200">
+          <Profile />
+        </div>
+      </div>
+
       <p className="text-xl mt-2">This is where admin can view all the data</p>
 
       {/* Stats Cards */}
