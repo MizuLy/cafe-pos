@@ -5,8 +5,8 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Menu() {
-  const APIDrink = `http://localhost:8880/api/drink`;
-  const APIOrder = `http://localhost:8880/api/order`;
+  const APIDrink = `${import.meta.env.VITE_API_URL}/api/drink`;
+  const APIOrder = `${import.meta.env.VITE_API_URL}/api/order`;
 
   const [drink, setDrink] = useState([]);
   const [cart, setCart] = useState([]);

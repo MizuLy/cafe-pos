@@ -22,18 +22,21 @@ export default function Register() {
     }
 
     try {
-      const res = await fetch("http://localhost:8880/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: fullname,
+            email,
+            password,
+            avatar,
+          }),
         },
-        body: JSON.stringify({
-          name: fullname,
-          email,
-          password,
-          avatar,
-        }),
-      });
+      );
 
       const data = await res.json();
 

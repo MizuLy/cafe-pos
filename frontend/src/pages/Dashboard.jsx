@@ -9,8 +9,8 @@ import RevenueBarChart from "../components/RevenueBarChart";
 import Profile from "../components/Profile";
 
 export default function Dashboard() {
-  const APIOrder = `http://localhost:8880/api/order`;
-  const APIDrink = `http://localhost:8880/api/drink`;
+  const APIOrder = `${import.meta.env.VITE_API_URL}/api/order`;
+  const APIDrink = `${import.meta.env.VITE_API_URL}/api/drink`;
   const [drink, setDrink] = useState([]);
   const [order, setOrder] = useState([]);
 

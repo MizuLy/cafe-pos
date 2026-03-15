@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Profile from "../components/Profile";
 
 export default function Drink() {
-  const API = `http://localhost:8880/api/drink`;
+  const API = `${import.meta.env.VITE_API_URL}/api/drink`;
   const [drink, setDrink] = useState([]);
   const [formData, setFormData] = useState({
     item_name: "",

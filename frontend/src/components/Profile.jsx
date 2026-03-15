@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Profile() {
-  const API = `http://localhost:8880/api/auth/me`;
+  const API = `${import.meta.env.VITE_API_URL}/api/auth/me`;
   const [user, setUser] = useState(null);
 
   const getUser = async () => {
