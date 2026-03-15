@@ -17,8 +17,8 @@ const addOrder = async (drink_id, quantity) => {
     const total_price = price * quantity;
 
     const [result] = await db.query(
-      "INSERT INTO `order`(item_name, price, quantity, total_price, created_at) VALUES (?,?,?,?, NOW())",
-      [item_name, price, quantity, total_price],
+      "INSERT INTO `order`(item_name, price, quantity, created_at) VALUES (?,?,?, NOW())",
+      [item_name, price, quantity],
     );
 
     return {
@@ -58,8 +58,8 @@ const updateOrder = async (order_id, drink_id, quantity) => {
     const total_price = price * quantity;
 
     const [row] = await db.query(
-      "UPDATE `order` SET `item_name`=?,`price`=?,`quantity`=?,`total_price`=? WHERE id = ?",
-      [item_name, price, quantity, total_price, order_id],
+      "UPDATE `order` SET `item_name`=?,`price`=?,`quantity`=? WHERE id = ?",
+      [item_name, price, quantity, order_id],
     );
 
     if (row.affectedRows === 0) return null;
